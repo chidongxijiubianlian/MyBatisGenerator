@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generator.dao.deviceMapper">
+  <resultMap id="BaseResultMap" type="com.generator.pojo.device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceID" jdbcType="VARCHAR" property="deviceid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bluetoothkey" jdbcType="VARCHAR" property="bluetoothkey" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, deviceID, name, bluetoothkey, ownerid, createdate
+  </sql>
+  <select id="selectByExample" parameterType="com.generator.pojo.deviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.generator.pojo.deviceExample">
+    delete from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.generator.pojo.device">
+    insert into test_device (id, deviceID, name, 
+      bluetoothkey, ownerid, createdate
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bluetoothkey,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generator.pojo.device">
+    insert into test_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.generator.pojo.deviceExample" resultType="java.lang.Integer">
+    select count(*) from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceid != null">
+        deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bluetoothkey != null">
+        bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generator.pojo.device">
+    update test_device
+    <set>
+      <if test="deviceid != null">
+        deviceID = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generator.pojo.device">
+    update test_device
+    set deviceID = #{deviceid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.generator.pojo.device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceID" jdbcType="VARCHAR" property="deviceid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bluetoothkey" jdbcType="VARCHAR" property="bluetoothkey" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, deviceID, name, bluetoothkey, ownerid, createdate
+  </sql>
+  <select id="selectByExample" parameterType="com.generator.pojo.deviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.generator.pojo.deviceExample">
+    delete from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.generator.pojo.device">
+    insert into test_device (id, deviceID, name, 
+      bluetoothkey, ownerid, createdate
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bluetoothkey,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generator.pojo.device">
+    insert into test_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.generator.pojo.deviceExample" resultType="java.lang.Integer">
+    select count(*) from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceid != null">
+        deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bluetoothkey != null">
+        bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generator.pojo.device">
+    update test_device
+    <set>
+      <if test="deviceid != null">
+        deviceID = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generator.pojo.device">
+    update test_device
+    set deviceID = #{deviceid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.generator.pojo.device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceID" jdbcType="VARCHAR" property="deviceid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bluetoothkey" jdbcType="VARCHAR" property="bluetoothkey" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, deviceID, name, bluetoothkey, ownerid, createdate
+  </sql>
+  <select id="selectByExample" parameterType="com.generator.pojo.deviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.generator.pojo.deviceExample">
+    delete from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.generator.pojo.device">
+    insert into test_device (id, deviceID, name, 
+      bluetoothkey, ownerid, createdate
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bluetoothkey,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generator.pojo.device">
+    insert into test_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.generator.pojo.deviceExample" resultType="java.lang.Integer">
+    select count(*) from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceid != null">
+        deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bluetoothkey != null">
+        bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generator.pojo.device">
+    update test_device
+    <set>
+      <if test="deviceid != null">
+        deviceID = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generator.pojo.device">
+    update test_device
+    set deviceID = #{deviceid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.generator.pojo.device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceID" jdbcType="VARCHAR" property="deviceid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bluetoothkey" jdbcType="VARCHAR" property="bluetoothkey" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, deviceID, name, bluetoothkey, ownerid, createdate
+  </sql>
+  <select id="selectByExample" parameterType="com.generator.pojo.deviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.generator.pojo.deviceExample">
+    delete from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.generator.pojo.device">
+    insert into test_device (id, deviceID, name, 
+      bluetoothkey, ownerid, createdate
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bluetoothkey,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generator.pojo.device">
+    insert into test_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.generator.pojo.deviceExample" resultType="java.lang.Integer">
+    select count(*) from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceid != null">
+        deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bluetoothkey != null">
+        bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generator.pojo.device">
+    update test_device
+    <set>
+      <if test="deviceid != null">
+        deviceID = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generator.pojo.device">
+    update test_device
+    set deviceID = #{deviceid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.generator.pojo.device">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deviceID" jdbcType="VARCHAR" property="deviceid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bluetoothkey" jdbcType="VARCHAR" property="bluetoothkey" />
+    <result column="ownerid" jdbcType="INTEGER" property="ownerid" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, deviceID, name, bluetoothkey, ownerid, createdate
+  </sql>
+  <select id="selectByExample" parameterType="com.generator.pojo.deviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_device
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.generator.pojo.deviceExample">
+    delete from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.generator.pojo.device">
+    insert into test_device (id, deviceID, name, 
+      bluetoothkey, ownerid, createdate
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bluetoothkey,jdbcType=VARCHAR}, #{ownerid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.generator.pojo.device">
+    insert into test_device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceid != null">
+        deviceID,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey,
+      </if>
+      <if test="ownerid != null">
+        ownerid,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null">
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.generator.pojo.deviceExample" resultType="java.lang.Integer">
+    select count(*) from test_device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceid != null">
+        deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bluetoothkey != null">
+        bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerid != null">
+        ownerid = #{record.ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_device
+    set id = #{record.id,jdbcType=INTEGER},
+      deviceID = #{record.deviceid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      bluetoothkey = #{record.bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{record.ownerid,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.generator.pojo.device">
+    update test_device
+    <set>
+      <if test="deviceid != null">
+        deviceID = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bluetoothkey != null">
+        bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerid != null">
+        ownerid = #{ownerid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.generator.pojo.device">
+    update test_device
+    set deviceID = #{deviceid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bluetoothkey = #{bluetoothkey,jdbcType=VARCHAR},
+      ownerid = #{ownerid,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
